@@ -14,6 +14,7 @@ from setup import version
 
 DELAY_AMOUNT = 10
 
+SIGNATURE = "\n\n---------------\nبه روز ترین اطلاعات بلندر\n@MohsenLinux"
 
 def get_config_data(path_file_config):
     """get default configuration data from file config.ini
@@ -30,7 +31,7 @@ def get_config_data(path_file_config):
 
 def foward_photo(message, destination_chat):
 
-    caption = get_caption(message)
+    caption = (message.caption.markdown if message.caption else "") + SIGNATURE  # افزودن امضا
     photo_id = message.photo.file_id
     try:
         tg.send_photo(
@@ -51,7 +52,7 @@ def foward_photo(message, destination_chat):
 
 def foward_text(message, destination_chat):
 
-    text = message.text.markdown
+    text = message.text.markdown + SIGNATURE  # افزودن امضا
     try:
         tg.send_message(
             chat_id=destination_chat,
@@ -88,7 +89,7 @@ def foward_sticker(message, destination_chat):
 
 def foward_document(message, destination_chat):
 
-    caption = get_caption(message)
+    caption = (message.caption.markdown if message.caption else "") + SIGNATURE  # افزودن امضا
     document_id = message.document.file_id
     try:
         tg.send_document(
@@ -110,7 +111,7 @@ def foward_document(message, destination_chat):
 
 def foward_animation(message, destination_chat):
 
-    caption = get_caption(message)
+    caption = (message.caption.markdown if message.caption else "") + SIGNATURE  # افزودن امضا
     animation_id = message.animation.file_id
     try:
         tg.send_animation(
@@ -132,7 +133,7 @@ def foward_animation(message, destination_chat):
 
 def foward_audio(message, destination_chat):
 
-    caption = get_caption(message)
+    caption = (message.caption.markdown if message.caption else "") + SIGNATURE  # افزودن امضا
     audio_id = message.audio.file_id
     try:
         tg.send_audio(
@@ -154,7 +155,7 @@ def foward_audio(message, destination_chat):
 
 def foward_voice(message, destination_chat):
 
-    caption = get_caption(message)
+    caption = (message.caption.markdown if message.caption else "") + SIGNATURE  # افزودن امضا
     voice_id = message.voice.file_id
     try:
         tg.send_voice(
@@ -196,7 +197,7 @@ def foward_video_note(message, destination_chat):
 
 def foward_video(message, destination_chat):
 
-    caption = get_caption(message)
+    caption = (message.caption.markdown if message.caption else "") + SIGNATURE  # افزودن امضا
     video_id = message.video.file_id
     try:
         tg.send_video(
